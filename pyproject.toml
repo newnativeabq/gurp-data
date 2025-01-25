@@ -1,7 +1,58 @@
 [project]
 name = "gurp-data"
 version = "0.1.0"
-description = "Add your description here"
+description = "A standardized framework for representing diverse data types, enabling seamless interaction between humans and AI."
 readme = "README.md"
-requires-python = ">=3.11"
-dependencies = []
+requires-python = ">=3.13"
+dependencies = [
+    "black>=24.10.0",
+]
+
+[dependency-groups]
+dev = [
+    "black>=24.10.0",
+    "mypy>=1.14.1",
+    "pre-commit>=4.1.0",
+]
+
+# Black Configuration for Code Formatting
+[tool.black]
+line-length = 88
+target-version = ['py313']
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | _build
+  | buck-out
+  | build
+  | dist
+)/
+'''
+
+# Flake8 Configuration for Linting
+[tool.flake8]
+max-line-length = 88
+extend-ignore = ["E203", "W503"]
+exclude = [
+    ".git",
+    "__pycache__",
+    "build",
+    "dist",
+    "venv",
+    "scripts",
+    "docs",
+    "tests",
+]
+
+# Optional: isort Configuration for Import Sorting
+[tool.isort]
+profile = "black"
+line_length = 88
+known_third_party = ["numpy", "pandas"]  # Update with your third-party packages
+default_section = "THIRDPARTY"
+sections = ["FUTURE", "STDLIB", "THIRDPARTY", "FIRSTPARTY", "LOCALFOLDER"]
